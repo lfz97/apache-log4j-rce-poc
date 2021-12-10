@@ -1,3 +1,5 @@
+//log4j服务端代码
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
