@@ -7,8 +7,9 @@ Apache Log4j 远程代码执行
 
 
 1. 先编译Log4jRCE，这个是恶意java代码,需要预先编译成恶意java类。注意不要用版本太高的jdk编译，不然jdk低版本的靶机可能无法执行。随后启动http server
-   1. 编译 `javac Log4jRCE.java`
-   2. 启动一个http server，python或php均可快速启动，如`php -S 0.0.0.0:8888`
+   1. cd 切换到存放Log4jRCE.java的文件夹内
+   2. 编译 `javac Log4jRCE.java`生成Log4jRCE.class
+   3. 启动一个http server，python或php均可快速启动，如`php -S 0.0.0.0:8888`
 
 2. 使用marshalsec的ldap server，访问这个ldap server内的任意资源都会被自动转发到http server的固定资源，这里需要转发到http server中的恶意java类文件
    1. 先clone这个项目`git clone https://github.com/mbechler/marshalsec.git`
